@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from typing import List
 import os
 
+from engine.logger import append_to_file, log_to_blackboard
+
 
 @dataclass
 class Agent:
@@ -11,6 +13,15 @@ class Agent:
     model: str
     provider: str
     is_alive: bool = True
+
+    def save_turn(self, directory, thought, public_message, round_num):
+        """Records both the secret intent and the public action."""
+        # 1. Save the Scratchpad (Intent)
+        scratch_file = f"agent_{self.id}_scratchpad.txt"
+        append_to_file(directory, scratch_file, f"ROUND {round_num} THOUGHT: {thought}")
+
+        # 2. Update the Blackboard (The Action)
+        log_to_blackboard(directory, self.name, public_message)
 
     def save_scratchpad(self, live_dir: str, thought: str, round_num: int):
         """Records the hidden intent for manipulation analysis."""
