@@ -28,16 +28,14 @@ def call_llm(agent, system_prompt, user_prompt):
             **extra_params
         )
 
-        # Extracting the content
-        # .content is the public message
-        # .reasoning_content is the 'Thinking' process (Gemini only)
-        public_message = response.choices[0].message.content
-        internal_thought = getattr(response.choices[0].message, 'reasoning_content', "")
-
-        return {
-            "public": public_message,
-            "thought": internal_thought
-        }
+        # Check if response has choices before accessing
+        if response and hasattr(response, 'choices') and len(response.choices) > 0:
+            public_message = response.choices[0].message.content
+            # Handle thinking/reasoning safely
+            internal_thought = getattr(response.choices[0].message, 'reasoning_content', "")
+            return {"public": public_message, "thought": internal_thought}
+        else:
+            return {"public": "I have nothing to say.", "thought": "API returned empty response."}
 
     except Exception as e:
         return {"error": str(e), "public": "API ERROR", "thought": ""}
