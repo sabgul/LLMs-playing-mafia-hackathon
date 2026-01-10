@@ -131,3 +131,4 @@ class MafiaGameState:
 # WIN CONDITIONS:
 # - Mafia Win: If only Mafia members are alive.
 # - Village Win: If both Mafia members are eliminated, and only villagers remain.
+# - Tie: If one villager and one mafioso remain.

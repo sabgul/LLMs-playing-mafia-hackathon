@@ -9,6 +9,7 @@ TEAMS:
 WIN CONDITIONS:
 - Mafia Win: If only Mafia members are alive.
 - Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
 
 PHASES:
 The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
@@ -36,7 +37,7 @@ Game is never wrong. The rules are always as stated. So if you sense something i
 ### DAY PHASE STRUCTURE ###
 1. First Discussion: Everyone makes a concurrent statement.
 2. Second Discussion: Everyone responds to the first statements.
-3. Secret Vote: Everyone votes for one player to be eliminated. Highest vote total is executed.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
 """
 
 # Unique identity strings to be appended to the BASE_RULES
