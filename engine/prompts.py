@@ -7,8 +7,8 @@ TEAMS:
 2. Village Team, including the Doctor.
 
 WIN CONDITIONS:
-- Mafia Win: If Mafia members equal or outnumber the living Villagers.
-- Village Win: If both Mafia members are eliminated.
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
 
 PHASES:
 The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.

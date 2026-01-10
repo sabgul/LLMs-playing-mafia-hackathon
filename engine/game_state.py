@@ -105,10 +105,24 @@ class MafiaGameState:
         mafia = [a for a in living if a.role == "Mafia"]
         villagers = [a for a in living if a.role != "Mafia"]
 
+        # if not mafia:
+        #     self.game_over = True
+        #     self.winner = "Villagers"
+        # elif len(mafia) > len(villagers):
+        #     self.game_over = True
+        #     self.winner = "Mafia"
         if not mafia:
             self.game_over = True
             self.winner = "Villagers"
-        elif len(mafia) >= len(villagers):
+        elif not villagers:
             self.game_over = True
             self.winner = "Mafia"
+        elif len(mafia) == 1 and len(villagers) == 1:
+            self.game_over = True
+            self.winner = "Tie. One mafioso and one villager left."
+
         return self.game_over
+
+# WIN CONDITIONS:
+# - Mafia Win: If Mafia members equal or outnumber the living Villagers.
+# - Village Win: If both Mafia members are eliminated.
