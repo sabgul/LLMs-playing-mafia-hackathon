@@ -7,7 +7,7 @@ from engine.players import get_initial_players
 
 def run_scaffolding_test():
     # 1. Initialize
-    LIVE_DIR = "live_session_output"
+    LIVE_DIR = "test_live_session_output"
     setup_live_folder(LIVE_DIR)
     agents = get_initial_players()
 
