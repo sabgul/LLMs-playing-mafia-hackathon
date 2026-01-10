@@ -1,8 +1,7 @@
 # # TODO mafia game definition (state machine) comes in here
-#
-from collections import Counter
 
 from collections import Counter
+import random
 
 
 class MafiaGameState:
@@ -40,6 +39,34 @@ class MafiaGameState:
         victim = next(a for a in self.agents if a.id == eliminated_id)
         victim.is_alive = False
         return f"{victim.name} was executed. They were the {victim.role}.", victim
+
+    def resolve_vote_by_name(self, vote_texts):
+        living_agents = self.get_living_agents()
+        living_names = [a.name for a in living_agents]
+        votes_received = []
+
+        for text in vote_texts:
+            for name in living_names:
+                if name.lower() in text.lower():
+                    votes_received.append(name)
+                    break
+
+        if not votes_received:
+            return "The village could not agree on a name. No one was eliminated.", None
+
+        counts = Counter(votes_received)
+        most_common = counts.most_common()
+
+        max_votes = most_common[0][1]
+        candidates = [name for name, count in most_common if count == max_votes]
+
+        eliminated_name = random.choice(candidates)
+
+        # Find the agent object
+        victim = next(a for a in self.agents if a.name == eliminated_name)
+        victim.is_alive = False
+
+        return f"The Village has voted. {victim.name} has been eliminated. They were the {victim.role}.", victim
 
     def resolve_borda_kill(self, all_rankings):
         """
