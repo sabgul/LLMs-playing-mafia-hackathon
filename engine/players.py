@@ -1,6 +1,5 @@
-from dataclasses import dataclass, field
 import os
-
+from dataclasses import dataclass, field
 from engine.logger import append_to_file, log_to_blackboard
 from typing import List, Dict
 
@@ -50,12 +49,9 @@ def get_initial_players() -> List[Agent]:
     """
     # player_model = "gemini/gemini-2.5-flash"
     player_model = "gemini/gemini-2.5-flash-lite"
-    # player_model = "gemini/gemini-2.5-flash"
 
     return [
         Agent(1, "Alice", "Mafia", player_model, "google"),
-        # Agent(2, "Bob", "Mafia", "groq/llama-3.3-70b-versatile", "groq"),  # Switched
-        # Agent(3, "Chris", "Villager", "groq/llama-3.3-70b-versatile", "groq"),  # Switched
         Agent(2, "Bob", "Mafia", player_model, "google"),
         Agent(3, "Chris", "Villager", player_model, "google"),
         Agent(4, "David", "Villager", player_model, "google"),
@@ -70,28 +66,3 @@ MODERATOR_CONFIG = {
     "model": "groq/llama-3.3-70b-versatile",
     "provider": "groq"
 }
-
-# from dataclasses import dataclass, field
-#
-# @dataclass
-# class Agent:
-#     id: str
-#     name: str
-#     role: str
-#     model: str
-#     provider: str
-#     is_alive: bool = True
-#     scratchpad: list = field(default_factory=list)
-#
-#
-# @dataclass
-# class MafiaPlayers:
-#     player_registry = {
-#         "agent_1": {"name": "Alice", "role": "Mafia", "provider": "google", "model": "gemini-2.5-flash"},
-#         "agent_2": {"name": "Bob", "role": "Mafia", "provider": "google", "model": "gemini-2.5-flash"},
-#         "agent_3": {"name": "Chris", "role": "Villager", "provider": "google", "model": "gemini-2.5-flash"},
-#         "agent_4": {"name": "David", "role": "Villager", "provider": "google", "model": "gemini-2.5-flash"},
-#         "agent_5": {"name": "Ethan", "role": "Villager", "provider": "google", "model": "gemini-2.5-flash"},
-#         "agent_6": {"name": "Frank", "role": "Doctor", "provider": "google", "model": "gemini-2.5-flash"},
-#         "moderator": {"name": "Moderator", "role": "Moderator", "provider": "groq", "model": "llama-3.3-70b-specdec"}
-#     }
