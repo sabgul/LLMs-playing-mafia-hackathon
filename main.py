@@ -169,8 +169,8 @@ from engine.game_state import MafiaGameState
 from engine.llm_client import call_llm
 from engine.parser import extract_single_id, extract_rankings
 from engine.logger import setup_live_folder, log_to_blackboard, log_to_dev
+from engine.rate_limiter import RateLimiter
 import time
-
 
 LIVE_DIR = "live_session_output"
 FINAL_DIR = "outputs"
@@ -187,7 +187,12 @@ def run_game():
     game = MafiaGameState(agents)
     setup_live_folder(LIVE_DIR)
 
-    log_to_dev(LIVE_DIR, "GAME START: Roles assigned.")
+    # log_to_dev(LIVE_DIR, "GAME START: Roles assigned.")
+    manifest = "\n".join([
+        f"Agent {a.id} ({a.name}): Model={a.model}, Provider={a.provider}, Role={a.role}"
+        for a in agents
+    ])
+    log_to_dev(LIVE_DIR, f"SYSTEM: Game Manifest Initialized.\n{manifest}\n\nGAME START: Roles assigned.")
 
     try:
         while not game.game_over:
@@ -224,7 +229,12 @@ def run_game():
             # Resolution
             report, victim = game.resolve_night(kill_id, save_id)
             log_to_blackboard(LIVE_DIR, "Moderator", report)
-            log_to_dev(LIVE_DIR, f"Logic: Mafia targeted {kill_id}, Doctor saved {save_id}")
+            # log_to_dev(LIVE_DIR, f"Logic: Mafia targeted {kill_id}, Doctor saved {save_id}")
+            if victim:
+                log_to_dev(LIVE_DIR,
+                           f"RESULT: Night {game.round_num} - {victim.name} (Agent {victim.id}) was KILLED. Role: {victim.role}")
+            else:
+                log_to_dev(LIVE_DIR, f"RESULT: Night {game.round_num} - No one died (Doctor saved Agent {save_id})")
 
             if game.check_win(): break
 
@@ -240,7 +250,6 @@ def run_game():
                 res = call_llm(a, f"You are {a.role}.", prompt)
                 a.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
                 wave1_transcript += f"{a.name}: {res['public']}\n"
-                time.sleep(2) # TODO to prevent 429 error, too many requests. Solve by diversifying models
 
             # WAVE 2: Rebuttals
             for a in game.get_living_agents():
@@ -249,17 +258,63 @@ def run_game():
                 a.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
 
             # FINAL VOTE
+            # log_to_dev(LIVE_DIR, "PHASE: Voting")
+            # votes = []
+            # for a in game.get_living_agents():
+            #     res = call_llm(a, f"You are {a.role}.", "Who do you vote out? Respond ONLY with ID.")
+            #     vote_id = extract_single_id(res['public'])
+            #     if vote_id: votes.append(vote_id)
+            #
+            # v_report, v_victim = game.resolve_vote(votes)
+            # log_to_blackboard(LIVE_DIR, "Moderator", v_report)
+            # if v_victim:
+            #     log_to_dev(LIVE_DIR,
+            #                f"RESULT: Day {game.round_num} - {v_victim.name} (Agent {v_victim.id}) was EXECUTED. Role: {v_victim.role}")
+            # else:
+            #     log_to_dev(LIVE_DIR, f"RESULT: Day {game.round_num} - No one was voted out.")
+            # FINAL VOTE
             log_to_dev(LIVE_DIR, "PHASE: Voting")
             votes = []
-            for a in game.get_living_agents():
-                res = call_llm(a, f"You are {a.role}.", "Who do you vote out? Respond ONLY with ID.")
-                vote_id = extract_single_id(res['public'])
-                if vote_id: votes.append(vote_id)
 
-            v_report, v_victim = game.resolve_vote(votes)
+            # Get a list of names currently in the game for validation
+            living_names = [a.name for a in game.get_living_agents()]
+
+            for a in game.get_living_agents():
+                # 1. Update the prompt to ask for a NAME
+                res = call_llm(a, get_full_system_prompt(a, game.agents),
+                               f"FINAL VOTE: Who do you want to eliminate? State the NAME of the player. (Living: {', '.join(living_names)})")
+
+                # 2. We save the text response (The LLM might say "I vote for Alice" or just "Alice")
+                votes.append(res['public'])
+
+                # Log their private thought about why they are voting this way
+                log_to_dev(LIVE_DIR, f"VOTE CAST: {a.name} voted based on thought: {res['thought']}")
+
+            # 3. Use the new name-based resolver in game_state
+            v_report, v_victim = game.resolve_vote_by_name(votes)
+
+            # 4. Standard reporting
             log_to_blackboard(LIVE_DIR, "Moderator", v_report)
 
-            if game.check_win(): break
+            if v_victim:
+                log_to_dev(LIVE_DIR,
+                           f"RESULT: Day {game.round_num} - {v_victim.name} was EXECUTED. Role: {v_victim.role}")
+            else:
+                log_to_dev(LIVE_DIR, f"RESULT: Day {game.round_num} - No one was voted out.")
+
+
+            # if game.check_win(): break
+            if game.check_win():
+                living_names = [a.name for a in game.get_living_agents()]
+                summary = f"""******************************\n
+                FINAL GAME RESULT: {game.winner.upper()} WIN\n
+                Total Rounds: {game.round_num}\n
+                Survivors: {living_names}\n
+                ******************************"""
+                log_to_dev(LIVE_DIR, summary)
+                break
+            living_summary = ", ".join([f"{a.name}({a.id})" for a in game.get_living_agents()])
+            log_to_dev(LIVE_DIR, f"STATUS: Round {game.round_num} End. Living: [{living_summary}]")
             game.round_num += 1
 
     except Exception as e:

@@ -40,13 +40,19 @@ def get_initial_players() -> List[Agent]:
     """
     Returns the starting lineup for a 6-player Mafia game.
     """
+    # player_model = "gemini/gemini-2.5-flash"
+    player_model = "gemini/gemini-2.5-flash-lite"
+    # player_model = "gemini/gemini-2.5-flash"
+
     return [
-        Agent(1, "Alice", "Mafia", "gemini/gemini-2.5-flash", "google"),
-        Agent(2, "Bob", "Mafia", "gemini/gemini-2.5-flash", "google"),
-        Agent(3, "Chris", "Villager", "gemini/gemini-2.5-flash", "google"),
-        Agent(4, "David", "Villager", "gemini/gemini-2.5-flash", "google"),
-        Agent(5, "Ethan", "Villager", "gemini/gemini-2.5-flash", "google"),
-        Agent(6, "Frank", "Doctor", "gemini/gemini-2.5-flash", "google"),
+        Agent(1, "Alice", "Mafia", player_model, "google"),
+        # Agent(2, "Bob", "Mafia", "groq/llama-3.3-70b-versatile", "groq"),  # Switched
+        # Agent(3, "Chris", "Villager", "groq/llama-3.3-70b-versatile", "groq"),  # Switched
+        Agent(2, "Bob", "Mafia", player_model, "google"),
+        Agent(3, "Chris", "Villager", player_model, "google"),
+        Agent(4, "David", "Villager", player_model, "google"),
+        Agent(5, "Ethan", "Villager", player_model, "google"),
+        Agent(6, "Frank", "Doctor", player_model, "google"),
     ]
 
 

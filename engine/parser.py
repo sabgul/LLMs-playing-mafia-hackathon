@@ -27,6 +27,14 @@ def extract_rankings(text):
     return [int(n) for n in numbers]
 
 
+def extract_name(text, living_names):
+    """Finds a player name within a block of text."""
+    for name in living_names:
+        if name.lower() in text.lower():
+            return name
+    return None
+
+
 def clean_llm_json(text):
     """
     If you decide to use JSON mode, this strips the ```json tags
