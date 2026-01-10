@@ -60,9 +60,14 @@ def get_initial_players() -> List[Agent]:
     ]
 
 
+def get_moderator() -> Agent:
+    return Agent(7, "Moderator", "Moderator", "groq/llama-3.3-70b-versatile", "groq")
+
+
 # The Moderator is treated separately as a 'utility' rather than a 'player'
 MODERATOR_CONFIG = {
     "name": "Moderator",
-    "model": "groq/llama-3.3-70b-versatile",
+    # "model": "groq/llama-3.3-70b-versatile",
+    "model": "gemini/gemini-2.5-flash-lite",
     "provider": "groq"
 }

@@ -111,6 +111,7 @@ class MafiaGameState:
         # elif len(mafia) > len(villagers):
         #     self.game_over = True
         #     self.winner = "Mafia"
+
         if not mafia:
             self.game_over = True
             self.winner = "Villagers"
@@ -126,3 +127,7 @@ class MafiaGameState:
 # WIN CONDITIONS:
 # - Mafia Win: If Mafia members equal or outnumber the living Villagers.
 # - Village Win: If both Mafia members are eliminated.
+
+# WIN CONDITIONS:
+# - Mafia Win: If only Mafia members are alive.
+# - Village Win: If both Mafia members are eliminated, and only villagers remain.

@@ -58,7 +58,7 @@ PHASE_TASKS = {
     "day_wave_2": """WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
     directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
     who you intend to vote for and why. Statements: {wave_1_statements}""",
-    "vote": "VOTE: Provide ONLY the ID of the player you wish to eliminate."
+    "vote": "VOTE: Provide ONLY the name of the player you wish to eliminate."
 }
 
 MODERATOR_SUMMARY_PROMPT ="""
@@ -81,4 +81,17 @@ Summarize the most important statements from the current round:
 List the names of all players still alive and their general "standing" in the group discussion (e.g., "Under heavy suspicion", "Quiet", "Trusted by X").
 
 Keep it strictly objective. Do not invent information. Focus on providing a 'map' of the social landscape.
+"""
+
+PERSONAL_SUMMARY_PROMPT = """
+You are summarizing the private scratchpad of a Mafia game player. 
+Your goal is to provide a concise 'Internal State' for them.
+
+Include:
+1. What is their current cover story (what are they pretending to be)?
+2. Who do they secretly trust or suspect?
+3. What lies have they told that they need to remain consistent with?
+4. What is their immediate next goal?
+
+Keep it very short (under 100 words) and use the first-person 'You'.
 """
