@@ -1,8 +1,8 @@
-from dataclasses import dataclass
-from typing import List
+from dataclasses import dataclass, field
 import os
 
 from engine.logger import append_to_file, log_to_blackboard
+from typing import List, Dict
 
 
 @dataclass
@@ -13,6 +13,14 @@ class Agent:
     model: str
     provider: str
     is_alive: bool = True
+    history: List[Dict] = field(default_factory=list)
+
+    def add_to_memory(self, thought, public_statement, round_num):
+        self.history.append({
+            "round": round_num,
+            "thought": thought,
+            "public": public_statement
+        })
 
     def save_turn(self, directory, thought, public_message, round_num):
         """Records both the secret intent and the public action."""
