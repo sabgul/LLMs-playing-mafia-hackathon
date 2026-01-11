@@ -145,7 +145,7 @@ def run_game():
                 user_p = f"CURRENT ROSTER:\n{roster}\n{task_p}"
 
                 res = call_llm(m, sys_p, user_p)
-                m.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
+                m.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num, broadcast=False)
                 mafia_responses.append(res['public'])
 
             # NEW: Name-based Borda resolution
@@ -161,7 +161,7 @@ def run_game():
 
                 res = call_llm(doc, sys_p, user_p)
                 # doc.save_turn(LIVE_DIR, res['thought'], "[PRIVATE NIGHT ACTION]", game.round_num)
-                doc.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
+                doc.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num, broadcast=False)
                 # Helper to find the ID from the name mentioned
                 save_name = res['public']
                 living_agents = game.get_living_agents()

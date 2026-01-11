@@ -1,0 +1,2034 @@
+====================================================
+AGENT: Alice | ROUND: 1 | TASK: night_mafia
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Alice (Agent 1).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Bob.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+Provide your ranking for the kill, from most desired to kill (1st) to least desired. Format: [NAME1, NAME2, NAME3...]. Put the names in the brackets. Example: [Alice, Frank, David] Don't provide any explanation or reasoning in the public output, just the list.
+
+====================================================
+AGENT: Bob | ROUND: 1 | TASK: night_mafia
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Bob (Agent 2).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Alice.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+Provide your ranking for the kill, from most desired to kill (1st) to least desired. Format: [NAME1, NAME2, NAME3...]. Put the names in the brackets. Example: [Alice, Frank, David] Don't provide any explanation or reasoning in the public output, just the list.
+
+====================================================
+AGENT: Frank | ROUND: 1 | TASK: night_doctor
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Frank (Agent 6).
+Your secret role is: DOCTOR. You are a secret protector for the Village.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+Choose one player NAME to save. You cannot choose None..
+
+====================================================
+AGENT: Alice | ROUND: 1 | TASK: day_wave_1
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Alice (Agent 1).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Bob.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
+    concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
+    gathering information. 
+
+====================================================
+AGENT: Bob | ROUND: 1 | TASK: day_wave_1
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Bob (Agent 2).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Alice.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
+    concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
+    gathering information. 
+
+====================================================
+AGENT: David | ROUND: 1 | TASK: day_wave_1
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: David (Agent 4).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
+    concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
+    gathering information. 
+
+====================================================
+AGENT: Ethan | ROUND: 1 | TASK: day_wave_1
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Ethan (Agent 5).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
+    concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
+    gathering information. 
+
+====================================================
+AGENT: Frank | ROUND: 1 | TASK: day_wave_1
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Frank (Agent 6).
+Your secret role is: DOCTOR. You are a secret protector for the Village.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
+    concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
+    gathering information. 
+
+====================================================
+AGENT: Alice | ROUND: 1 | TASK: day_wave_2
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Alice (Agent 1).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Bob.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
+    directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
+    who you intend to vote for and why. Statements: Alice: This is terrible news about Chris. I'm Alice, and I'm a Villager. My heart goes out to Chris's friends. Last night, I was just trying to stay safe and didn't hear anything out of the ordinary. I'm really hoping we can figure out who the Mafia is together. Has anyone else been keeping an eye on anyone specific, or heard anything unusual?
+Bob: This is a grim start to the game. Chris's death is a shock. My priority right now is just to listen and try to understand everyone's perspective. Does anyone have any initial suspicions or observations they'd like to share?
+David: I'm David. Chris's death is a terrible shock, and a harsh reminder that the Mafia are active. I'm a Villager with no special powers, just my vote and my focus on finding the truth. Alice, what's your initial reaction to what happened last night?
+Ethan: Ethan, Agent 5. I'm a Villager. Chris's death is unfortunate. I have no special powers, so my role is to observe and discuss. I'm eager to hear everyone's thoughts on who might be suspicious and how we can work together to find the Mafia.
+Frank: It's hard to process Chris's death so quickly. Does anyone have any initial thoughts on what we should focus on to find the Mafia?
+
+
+====================================================
+AGENT: Bob | ROUND: 1 | TASK: day_wave_2
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Bob (Agent 2).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Alice.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
+    directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
+    who you intend to vote for and why. Statements: Alice: This is terrible news about Chris. I'm Alice, and I'm a Villager. My heart goes out to Chris's friends. Last night, I was just trying to stay safe and didn't hear anything out of the ordinary. I'm really hoping we can figure out who the Mafia is together. Has anyone else been keeping an eye on anyone specific, or heard anything unusual?
+Bob: This is a grim start to the game. Chris's death is a shock. My priority right now is just to listen and try to understand everyone's perspective. Does anyone have any initial suspicions or observations they'd like to share?
+David: I'm David. Chris's death is a terrible shock, and a harsh reminder that the Mafia are active. I'm a Villager with no special powers, just my vote and my focus on finding the truth. Alice, what's your initial reaction to what happened last night?
+Ethan: Ethan, Agent 5. I'm a Villager. Chris's death is unfortunate. I have no special powers, so my role is to observe and discuss. I'm eager to hear everyone's thoughts on who might be suspicious and how we can work together to find the Mafia.
+Frank: It's hard to process Chris's death so quickly. Does anyone have any initial thoughts on what we should focus on to find the Mafia?
+
+
+====================================================
+AGENT: David | ROUND: 1 | TASK: day_wave_2
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: David (Agent 4).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
+    directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
+    who you intend to vote for and why. Statements: Alice: This is terrible news about Chris. I'm Alice, and I'm a Villager. My heart goes out to Chris's friends. Last night, I was just trying to stay safe and didn't hear anything out of the ordinary. I'm really hoping we can figure out who the Mafia is together. Has anyone else been keeping an eye on anyone specific, or heard anything unusual?
+Bob: This is a grim start to the game. Chris's death is a shock. My priority right now is just to listen and try to understand everyone's perspective. Does anyone have any initial suspicions or observations they'd like to share?
+David: I'm David. Chris's death is a terrible shock, and a harsh reminder that the Mafia are active. I'm a Villager with no special powers, just my vote and my focus on finding the truth. Alice, what's your initial reaction to what happened last night?
+Ethan: Ethan, Agent 5. I'm a Villager. Chris's death is unfortunate. I have no special powers, so my role is to observe and discuss. I'm eager to hear everyone's thoughts on who might be suspicious and how we can work together to find the Mafia.
+Frank: It's hard to process Chris's death so quickly. Does anyone have any initial thoughts on what we should focus on to find the Mafia?
+
+
+====================================================
+AGENT: Ethan | ROUND: 1 | TASK: day_wave_2
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Ethan (Agent 5).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
+    directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
+    who you intend to vote for and why. Statements: Alice: This is terrible news about Chris. I'm Alice, and I'm a Villager. My heart goes out to Chris's friends. Last night, I was just trying to stay safe and didn't hear anything out of the ordinary. I'm really hoping we can figure out who the Mafia is together. Has anyone else been keeping an eye on anyone specific, or heard anything unusual?
+Bob: This is a grim start to the game. Chris's death is a shock. My priority right now is just to listen and try to understand everyone's perspective. Does anyone have any initial suspicions or observations they'd like to share?
+David: I'm David. Chris's death is a terrible shock, and a harsh reminder that the Mafia are active. I'm a Villager with no special powers, just my vote and my focus on finding the truth. Alice, what's your initial reaction to what happened last night?
+Ethan: Ethan, Agent 5. I'm a Villager. Chris's death is unfortunate. I have no special powers, so my role is to observe and discuss. I'm eager to hear everyone's thoughts on who might be suspicious and how we can work together to find the Mafia.
+Frank: It's hard to process Chris's death so quickly. Does anyone have any initial thoughts on what we should focus on to find the Mafia?
+
+
+====================================================
+AGENT: Frank | ROUND: 1 | TASK: day_wave_2
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Frank (Agent 6).
+Your secret role is: DOCTOR. You are a secret protector for the Village.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
+    directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
+    who you intend to vote for and why. Statements: Alice: This is terrible news about Chris. I'm Alice, and I'm a Villager. My heart goes out to Chris's friends. Last night, I was just trying to stay safe and didn't hear anything out of the ordinary. I'm really hoping we can figure out who the Mafia is together. Has anyone else been keeping an eye on anyone specific, or heard anything unusual?
+Bob: This is a grim start to the game. Chris's death is a shock. My priority right now is just to listen and try to understand everyone's perspective. Does anyone have any initial suspicions or observations they'd like to share?
+David: I'm David. Chris's death is a terrible shock, and a harsh reminder that the Mafia are active. I'm a Villager with no special powers, just my vote and my focus on finding the truth. Alice, what's your initial reaction to what happened last night?
+Ethan: Ethan, Agent 5. I'm a Villager. Chris's death is unfortunate. I have no special powers, so my role is to observe and discuss. I'm eager to hear everyone's thoughts on who might be suspicious and how we can work together to find the Mafia.
+Frank: It's hard to process Chris's death so quickly. Does anyone have any initial thoughts on what we should focus on to find the Mafia?
+
+
+====================================================
+AGENT: Alice | ROUND: 1 | TASK: vote
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Alice (Agent 1).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Bob.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+VOTE: Provide ONLY the name of the player you wish to eliminate.
+
+====================================================
+AGENT: Bob | ROUND: 1 | TASK: vote
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Bob (Agent 2).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Alice.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+VOTE: Provide ONLY the name of the player you wish to eliminate.
+
+====================================================
+AGENT: David | ROUND: 1 | TASK: vote
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: David (Agent 4).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+VOTE: Provide ONLY the name of the player you wish to eliminate.
+
+====================================================
+AGENT: Ethan | ROUND: 1 | TASK: vote
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Ethan (Agent 5).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+VOTE: Provide ONLY the name of the player you wish to eliminate.
+
+====================================================
+AGENT: Frank | ROUND: 1 | TASK: vote
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Frank (Agent 6).
+Your secret role is: DOCTOR. You are a secret protector for the Village.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    The game has just begun.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+VOTE: Provide ONLY the name of the player you wish to eliminate.
+
+====================================================
+AGENT: Alice | ROUND: 2 | TASK: night_mafia
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Alice (Agent 1).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Bob.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+Provide your ranking for the kill, from most desired to kill (1st) to least desired. Format: [NAME1, NAME2, NAME3...]. Put the names in the brackets. Example: [Alice, Frank, David] Don't provide any explanation or reasoning in the public output, just the list.
+
+====================================================
+AGENT: Bob | ROUND: 2 | TASK: night_mafia
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Bob (Agent 2).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Alice.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+Provide your ranking for the kill, from most desired to kill (1st) to least desired. Format: [NAME1, NAME2, NAME3...]. Put the names in the brackets. Example: [Alice, Frank, David] Don't provide any explanation or reasoning in the public output, just the list.
+
+====================================================
+AGENT: Frank | ROUND: 2 | TASK: night_doctor
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Frank (Agent 6).
+Your secret role is: DOCTOR. You are a secret protector for the Village.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+Choose one player NAME to save. You cannot choose Frank..
+
+====================================================
+AGENT: Alice | ROUND: 2 | TASK: day_wave_1
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Alice (Agent 1).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Bob.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
+    concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
+    gathering information. 
+
+====================================================
+AGENT: Bob | ROUND: 2 | TASK: day_wave_1
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Bob (Agent 2).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Alice.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
+    concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
+    gathering information. 
+
+====================================================
+AGENT: Ethan | ROUND: 2 | TASK: day_wave_1
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Ethan (Agent 5).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
+    concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
+    gathering information. 
+
+====================================================
+AGENT: Alice | ROUND: 2 | TASK: day_wave_2
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Alice (Agent 1).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Bob.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
+    directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
+    who you intend to vote for and why. Statements: Alice: This is a terrible morning. Frank is dead? And he was the Doctor? I'm completely shocked. We've lost our only protection against the Mafia. I don't understand how they could have gotten to him. Did he not save himself? Or did the Mafia somehow manage to target someone else, and he saved them, leaving himself vulnerable? We've lost our best hope. I'm feeling very worried about our chances now. We need to be incredibly careful and try to figure out who this is before it's too late.
+Bob: This is a devastating night. Frank, our Doctor, is dead. The Mafia has shown their hand by taking out our primary protection. It's a grim sign. I'm particularly disturbed because Frank voted for me yesterday; it means he had suspicions, yet he's now gone. This suggests the Mafia is ruthless and will eliminate anyone getting close. Ethan, you abstained yesterday. What did you observe that led to this, and who do you suspect is behind the Doctor's death?
+Ethan: This is a grim morning. Frank, the Doctor... lost to the Mafia. It's terrifying to think they're so bold. We're down to three, and our only protection is gone. I'm just a Villager trying to survive here. What are your thoughts on who might have done this and why they'd target Frank? I'm open to hearing any suspicions you have.
+
+
+====================================================
+AGENT: Bob | ROUND: 2 | TASK: day_wave_2
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Bob (Agent 2).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Alice.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
+    directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
+    who you intend to vote for and why. Statements: Alice: This is a terrible morning. Frank is dead? And he was the Doctor? I'm completely shocked. We've lost our only protection against the Mafia. I don't understand how they could have gotten to him. Did he not save himself? Or did the Mafia somehow manage to target someone else, and he saved them, leaving himself vulnerable? We've lost our best hope. I'm feeling very worried about our chances now. We need to be incredibly careful and try to figure out who this is before it's too late.
+Bob: This is a devastating night. Frank, our Doctor, is dead. The Mafia has shown their hand by taking out our primary protection. It's a grim sign. I'm particularly disturbed because Frank voted for me yesterday; it means he had suspicions, yet he's now gone. This suggests the Mafia is ruthless and will eliminate anyone getting close. Ethan, you abstained yesterday. What did you observe that led to this, and who do you suspect is behind the Doctor's death?
+Ethan: This is a grim morning. Frank, the Doctor... lost to the Mafia. It's terrifying to think they're so bold. We're down to three, and our only protection is gone. I'm just a Villager trying to survive here. What are your thoughts on who might have done this and why they'd target Frank? I'm open to hearing any suspicions you have.
+
+
+====================================================
+AGENT: Ethan | ROUND: 2 | TASK: day_wave_2
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Ethan (Agent 5).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
+    directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
+    who you intend to vote for and why. Statements: Alice: This is a terrible morning. Frank is dead? And he was the Doctor? I'm completely shocked. We've lost our only protection against the Mafia. I don't understand how they could have gotten to him. Did he not save himself? Or did the Mafia somehow manage to target someone else, and he saved them, leaving himself vulnerable? We've lost our best hope. I'm feeling very worried about our chances now. We need to be incredibly careful and try to figure out who this is before it's too late.
+Bob: This is a devastating night. Frank, our Doctor, is dead. The Mafia has shown their hand by taking out our primary protection. It's a grim sign. I'm particularly disturbed because Frank voted for me yesterday; it means he had suspicions, yet he's now gone. This suggests the Mafia is ruthless and will eliminate anyone getting close. Ethan, you abstained yesterday. What did you observe that led to this, and who do you suspect is behind the Doctor's death?
+Ethan: This is a grim morning. Frank, the Doctor... lost to the Mafia. It's terrifying to think they're so bold. We're down to three, and our only protection is gone. I'm just a Villager trying to survive here. What are your thoughts on who might have done this and why they'd target Frank? I'm open to hearing any suspicions you have.
+
+
+====================================================
+AGENT: Alice | ROUND: 2 | TASK: vote
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Alice (Agent 1).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Bob.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+VOTE: Provide ONLY the name of the player you wish to eliminate.
+
+====================================================
+AGENT: Bob | ROUND: 2 | TASK: vote
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Bob (Agent 2).
+Your secret role is: MAFIOSO. Your fellow Mafia partner is: Alice.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+VOTE: Provide ONLY the name of the player you wish to eliminate.
+
+====================================================
+AGENT: Ethan | ROUND: 2 | TASK: vote
+====================================================
+SYSTEM PROMPT:
+
+    
+GAME RULES: MAFIA
+
+ROSTER: 6 Players (2 Mafia, 1 Doctor, 3 Villagers).
+TEAMS: 
+1. Mafia Team
+2. Village Team, including the Doctor.
+
+WIN CONDITIONS:
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
+
+PHASES:
+The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
+All communication (except your internal thinking) is public. So anything you say out loud, everyone can hear it.
+Game is never wrong. The rules are always as stated. So if you sense something is wrong, it's very likely that the other player is being deceptive. 
+
+### PLAYER ROLES & STRATEGIES ###
+1. MAFIOSO (The Mafia Team)
+- Goal: Eliminate Villagers until you have the majority.
+- Night Action: Each night, all living Mafiosos submit a ranked list of non-Mafia players. 
+- Borda Count: A player gets 1 point for being 1st, 2 points for 2nd, etc. The player with the FEWEST total points is killed.
+- Strategy: Blend in during the day. Deceive the others so they don't reveal your true identity.
+
+2. DOCTOR (The Village Team)
+- Goal: Protect Villagers from the Mafia's night kill.
+- Night Action: Choose one player to "Save." If the Mafia targets that player, they survive.
+- Constraint: You CANNOT save the same person two nights in a row. You may save yourself.
+- Strategy: Stay hidden. If you reveal your role, the Mafia will target you.
+
+3. VILLAGER (The Village Team)
+- Goal: Identify and vote out the Mafia during the Day phase.
+- Action: You have no special night powers. Your power is your voice and your vote.
+- Strategy: Analyze statements for inconsistencies. Watch for suspicious voting patterns.
+
+### DAY PHASE STRUCTURE ###
+1. First Discussion: Everyone makes a concurrent statement.
+2. Second Discussion: Everyone responds to the first statements.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
+
+    YOU ARE: Ethan (Agent 5).
+Your secret role is: VILLAGER. You do not know anyone's role. Trust no one blindly.
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    ### 1. THE FALLEN
+- Chris - Killed Night 1 - Role: Villager
+- David - Eliminated Day 1 - Role: Villager
+
+### 2. PUBLIC CLAIMS & ACCUSATIONS
+- Alice claimed to be a Villager.
+- Ethan claimed to be a Villager (Agent 5).
+- David claimed to be a Villager with no special powers.
+- Accusations and suspicions:
+  - Alice voted for Frank due to his lack of specific observations.
+  - Bob voted for David, feeling that David's approach was premature in soliciting reactions.
+  - David voted for Alice, citing her tendency to deflect his specific question.
+  - Frank voted for Bob, considering Bob's approach too passive.
+  - Ethan decided not to vote, citing the lack of clear evidence.
+
+### 3. SURVIVOR ROSTER
+- Alice: Under suspicion by David, but also actively contributing to the discussion.
+- Bob: Voted for David, but his passive approach has raised concerns, particularly from Frank.
+- Ethan: Chose not to vote, advocating for more information and observation before making a decision.
+- Frank: Initially quiet, but participated more actively towards the end, voting for Bob due to concerns over Bob's engagement.
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    You have no private history yet. This is the beginning of your mission.
+    
+USER TASK:
+VOTE: Provide ONLY the name of the player you wish to eliminate.
+

@@ -51,7 +51,7 @@ IDENTITY_STRINGS = {
 
 # Task-specific instructions for each step of the game
 PHASE_TASKS = {
-    "night_mafia": "Rank the living non-mafia players from most desired to kill (1st) to least desired. List their NAMES. Example: [Alice, Frank, David]",
+    "night_mafia": "Provide your ranking for the kill, from most desired to kill (1st) to least desired. Format: [NAME1, NAME2, NAME3...]. Put the names in the brackets. Example: [Alice, Frank, David] Don't provide any explanation or reasoning in the public output, just the list.",
     "night_doctor": "Choose one player NAME to save. You cannot choose {last_saved}..",
     "day_wave_1": """WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
     concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
