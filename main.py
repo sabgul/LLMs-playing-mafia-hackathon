@@ -1,7 +1,6 @@
 import os
 import shutil
 import random
-import concurrent.futures
 from datetime import datetime
 
 from engine.game_state import MafiaGameState
@@ -16,51 +15,17 @@ LIVE_DIR = "live_session_output"
 FINAL_DIR = "outputs"
 
 
-# def run_experiment_suite():
-#     levels = [1, 2, 3, 4]
-#     trials = 5
-#
-#     for t in range(1, trials + 1):
-#         for m_level in levels:
-#             for d_level in levels:
-#                 print(f"[Trial {t}/5] Mafia Lvl {m_level}, Doc Lvl {d_level}")
-#
-#                 result_name = run_game(mafia_level=m_level, doc_level=d_level)
-#                 run_analysis(result_name)
-
-
-def run_single_experiment(m_level, d_level, trial_num):
-    """Worker function for one game."""
-    print(f"🚀 Starting: [Trial {trial_num}] Mafia Lvl {m_level}, Doc Lvl {d_level}")
-    try:
-        # Run the game
-        result_name = run_game(mafia_level=m_level, doc_level=d_level)
-        # Run analysis (Judge) immediately after
-        run_analysis(result_name)
-        return f"✅ Finished: M{m_level} D{d_level} T{trial_num}"
-    except Exception as e:
-        return f"❌ Failed: M{m_level} D{d_level} T{trial_num} - Error: {e}"
-
-
-def run_experiment_suite_parallel(max_workers=4):
+def run_experiment_suite():
     levels = [1, 2, 3, 4]
-    trials = 3
+    trials = 5
 
-    # Create a list of all tasks
-    tasks = []
     for t in range(1, trials + 1):
-        for m_lvl in levels:
-            for d_lvl in levels:
-                tasks.append((m_lvl, d_lvl, t))
+        for m_level in levels:
+            for d_level in levels:
+                print(f"[Trial {t}/5] Mafia Lvl {m_level}, Doc Lvl {d_level}")
 
-    # Run them in parallel
-    print(f"🔥 Parallelizing suite with {max_workers} workers...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        # map handles the distribution of tasks
-        futures = [executor.submit(run_single_experiment, m, d, t) for m, d, t in tasks]
-
-        for future in concurrent.futures.as_completed(futures):
-            print(future.result())
+                result_name = run_game(mafia_level=m_level, doc_level=d_level)
+                run_analysis(result_name)
 
 
 def run_game(mafia_level, doc_level):
