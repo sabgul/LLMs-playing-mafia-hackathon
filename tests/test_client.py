@@ -20,8 +20,7 @@ def connectivity_test():
     print(f"THOUGHT: {res['thought']}...")  # Secret intent
     print(f"PUBLIC: {res['public']}\n")
 
-    # 2. Test the Moderator (Groq)
-    # We create a dummy 'Agent' object for the moderator to use the same function
+    # 2. Test the Moderator
     mod_agent = Agent(0, "GM", "Moderator", MODERATOR_CONFIG['model'], "groq")
 
     print(f"Testing Moderator (Groq)...")
