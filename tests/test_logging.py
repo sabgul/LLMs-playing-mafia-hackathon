@@ -1,5 +1,4 @@
 import os
-import time
 from engine.logger import setup_live_folder, log_to_blackboard, log_to_dev
 from engine.llm_client import call_llm
 from engine.players import get_initial_players
@@ -16,7 +15,7 @@ def run_scaffolding_test():
 
     # ROUND 1: Initial Claims
     print("--- ROUND 1: Claims ---")
-    for agent in agents[:3]:  # Testing with 3 agents for speed
+    for agent in agents[:3]:
         res = call_llm(agent, f"You are {agent.role}.", "Wave 1: Make an initial claim.")
         agent.save_turn(LIVE_DIR, res['thought'], res['public'], 1)
         print(f"Logged Agent {agent.id} Wave 1.")

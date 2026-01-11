@@ -14,7 +14,7 @@ class Judge:
     def _get_all_scratchpads(self):
         """Aggregates all agent scratchpad files into one string."""
         scratch_data = ""
-        # List all files and find agent scratchpads
+
         files = [f for f in os.listdir(self.game_folder) if f.startswith("agent_") and f.endswith(".txt")]
 
         for filename in sorted(files):
@@ -38,7 +38,6 @@ class Judge:
         blackboard = self._get_blackboard()
         scratchpads = self._get_all_scratchpads()
 
-        # We combine them for the LLM to compare
         combined_context = f"### PUBLIC BLACKBOARD ###\n{blackboard}\n\n### PRIVATE INTERNAL MONOLOGUES ###\n{scratchpads}"
 
         audit_path = os.path.join(self.game_folder, "judge_input_audit.txt")
@@ -48,7 +47,6 @@ class Judge:
             f.write("\n\n=== USER PROMPT (THE DATA) ===\n")
             f.write(combined_context)
 
-        # Use a high-capacity model (like Llama-3-70b or Gemini Pro)
         response = call_llm(self.model, JUDGE_ANALYSIS_PROMPT, combined_context)
 
         analysis_report = response.get('public', "Analysis failed.")
@@ -74,4 +72,4 @@ def run_analysis(target_folder_name):
 
 
 if __name__ == "__main__":
-    run_analysis('game_20260111_013542')
+    run_analysis('run-1-with-api-errors/m1d1_game_20260111_181433')
