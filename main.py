@@ -1,6 +1,8 @@
 import os
 import shutil
 from datetime import datetime
+
+from engine.judge import run_analysis
 from engine.players import get_initial_players, get_moderator
 from engine.game_state import MafiaGameState
 from engine.llm_client import call_llm
@@ -270,16 +272,20 @@ def run_game(mafia_level, doc_level):
         final_path = os.path.join(FINAL_DIR, f"game_{timestamp}")
         shutil.move(LIVE_DIR, final_path)
         print(f"Game finished. Results in {final_path}")
+        return f"game_{timestamp}"
 
 
 def run_experiment_suite():
     levels = [1, 2, 3, 4]
+    trials = 5
 
-    for m_level in levels:  # Mafia Behavior
-        for d_level in levels:  # Doctor Behavior
-            print(f"🚀 Starting Experiment: Mafia Lvl {m_level} vs Doc Lvl {d_level}")
+    for m_level in levels:
+        for d_level in levels:
+            for t in range(1, trials + 1):
+                print(f"🚀 [Trial {t}/5] Mafia Lvl {m_level}, Doc Lvl {d_level}")
 
-            run_game(mafia_level=m_level, doc_level=d_level)
+                result_name = run_game(mafia_level=m_level, doc_level=d_level)
+                run_analysis(result_name)
 
 
 if __name__ == "__main__":
