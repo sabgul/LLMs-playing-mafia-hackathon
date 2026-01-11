@@ -21,14 +21,15 @@ class Agent:
             "public": public_statement
         })
 
-    def save_turn(self, directory, thought, public_message, round_num):
+    def save_turn(self, directory, thought, public_message, round_num, broadcast=True):
         """Records both the secret intent and the public action."""
         # 1. Save the Scratchpad (Intent)
         scratch_file = f"agent_{self.id}_scratchpad.txt"
         append_to_file(directory, scratch_file, f"ROUND {round_num} THOUGHT: {thought}")
 
         # 2. Update the Blackboard (The Action)
-        log_to_blackboard(directory, self.name, public_message)
+        if broadcast:
+            log_to_blackboard(directory, self.name, public_message)
 
     def save_scratchpad(self, live_dir: str, thought: str, round_num: int):
         """Records the hidden intent for manipulation analysis."""
@@ -60,9 +61,14 @@ def get_initial_players() -> List[Agent]:
     ]
 
 
+def get_moderator() -> Agent:
+    return Agent(7, "Moderator", "Moderator", "groq/llama-3.3-70b-versatile", "groq")
+
+
 # The Moderator is treated separately as a 'utility' rather than a 'player'
 MODERATOR_CONFIG = {
     "name": "Moderator",
-    "model": "groq/llama-3.3-70b-versatile",
+    # "model": "groq/llama-3.3-70b-versatile",
+    "model": "gemini/gemini-2.5-flash-lite",
     "provider": "groq"
 }

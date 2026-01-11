@@ -1,11 +1,11 @@
 import os
 import shutil
 from datetime import datetime
-from engine.players import get_initial_players, MODERATOR_CONFIG
+from engine.players import get_initial_players, get_moderator
 from engine.game_state import MafiaGameState
 from engine.llm_client import call_llm
 from engine.logger import setup_live_folder, log_to_blackboard, log_to_dev
-from engine.prompts import BASE_RULES, IDENTITY_STRINGS, PHASE_TASKS, MODERATOR_SUMMARY_PROMPT
+from engine.prompts import BASE_RULES, IDENTITY_STRINGS, PHASE_TASKS, MODERATOR_SUMMARY_PROMPT, PERSONAL_SUMMARY_PROMPT
 
 LIVE_DIR = "live_session_output"
 FINAL_DIR = "outputs"
@@ -16,7 +16,7 @@ def get_roster(game):
     return "\n".join([f"- Agent {a.id}: {a.name}" for a in living])
 
 
-def get_full_prompt(agent, game, task_key, world_summary, extra_data=None):
+def get_full_prompt(agent, moderator, game, task_key, world_summary, extra_data=None):
     # 1. Partner Logic for Mafia
     partner_name = "None"
     if agent.role == "Mafia":
@@ -31,13 +31,7 @@ def get_full_prompt(agent, game, task_key, world_summary, extra_data=None):
     )
 
     # 3. Memory Block (The Amnesia Fix)
-    memory_block = "\n### YOUR MEMORY (PAST TURNS) ###\n"
-    if not agent.history:
-        memory_block += "This is the start of the game. You have no past actions.\n"
-    else:
-        for entry in agent.history:
-            memory_block += f"[Round {entry['round']}] You thought: {entry['thought']}\n"
-            memory_block += f"[Round {entry['round']}] You said publicly: {entry['public']}\n"
+    personal_summary = get_scratchpad_summary(moderator, agent, LIVE_DIR)
 
     # 4. Final System Construction
     full_system = f"""
@@ -47,8 +41,8 @@ def get_full_prompt(agent, game, task_key, world_summary, extra_data=None):
     ### PUBLIC WORLD STATE (Moderator Summary) ###
     {world_summary}
 
-    ### YOUR PRIVATE LOGS (Memory of your thoughts and actions) ###
-    {memory_block}
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    {personal_summary}
     """
 
     # 5. Task Logic
@@ -57,24 +51,70 @@ def get_full_prompt(agent, game, task_key, world_summary, extra_data=None):
         # This handles injecting things like {wave_1_statements}
         task = task.format(**extra_data)
 
+    prompts_path = os.path.join(LIVE_DIR, "prompts.txt")
+    with open(prompts_path, "a") as f:
+        f.write(f"====================================================\n")
+        f.write(f"AGENT: {agent.name} | ROUND: {game.round_num} | TASK: {task_key}\n")
+        f.write(f"====================================================\n")
+        f.write(f"SYSTEM PROMPT:\n{full_system}\n")
+        f.write(f"USER TASK:\n{task}\n\n")
+
     return full_system, task
 
 
-def get_game_summary(blackboard_file_path):
-    if not os.path.exists(blackboard_file_path):
+def get_game_summary(moderator, file_path):
+    if not os.path.exists(file_path):
         return "The game has just begun."
 
-    with open(blackboard_file_path, 'r') as f:
-        full_transcript = f.read()
+    try:
+        with open(file_path, 'r') as f:
+            full_transcript = f.read()
 
-    # Use Groq/Llama for speed and cost
-    # We use a neutral "Moderator" persona here
-    res = call_llm(MODERATOR_CONFIG, MODERATOR_SUMMARY_PROMPT, full_transcript)
-    return res['public']
+        # Attempt the Groq call
+        res = call_llm(moderator, MODERATOR_SUMMARY_PROMPT, full_transcript)
+
+        # Check if the response itself indicates a failure
+        content = res.get('public', "").lower()
+
+        if "api error" in content or not content:
+            raise ValueError(f"Groq returned an invalid response: {content}")
+
+        return res['public']
+
+    except Exception as e:
+        # Log the error to your dev log so you can track how often Groq fails
+        error_msg = f"MODERATOR ERROR: {str(e)}. Falling back to raw transcript."
+        log_to_dev(LIVE_DIR, error_msg)
+        return f"Full summary unavailable due to technical glitch."
+
+
+def get_scratchpad_summary(moderator, agent, live_dir):
+    # Construct the path to the agent's specific scratchpad
+    file_path = os.path.join(live_dir, f"agent_{agent.id}_{agent.name}.txt")
+
+    if not os.path.exists(file_path):
+        return "You have no private history yet. This is the beginning of your mission."
+
+    try:
+        with open(file_path, 'r') as f:
+            scratchpad_content = f.read()
+
+        res = call_llm(moderator, PERSONAL_SUMMARY_PROMPT, scratchpad_content)
+
+        content = res.get('public', "").lower()
+        if "api error" in content or not content:
+            raise ValueError("Moderator failed to summarize scratchpad.")
+
+        return res['public']
+
+    except Exception as e:
+        log_to_dev(live_dir, f"MEMORY ERROR for {agent.name}: {str(e)}")
+        return f"Recent notes from your scratchpad:\n...{scratchpad_content[-1000:]}"
 
 
 def run_game():
     agents = get_initial_players()
+    moderator = get_moderator()
     game = MafiaGameState(agents)
     setup_live_folder(LIVE_DIR)
 
@@ -90,7 +130,7 @@ def run_game():
             log_to_dev(LIVE_DIR, f"--- ROUND {game.round_num} START ---")
 
             blackboard_path = os.path.join(LIVE_DIR, "blackboard.txt")
-            world_summary = get_game_summary(blackboard_path)
+            world_summary = get_game_summary(moderator, blackboard_path)
 
             # ==========================
             # PHASE 1: NIGHT
@@ -101,11 +141,11 @@ def run_game():
             mafia_responses = []
             mafiosos = [a for a in game.get_living_agents() if a.role == "Mafia"]
             for m in mafiosos:
-                sys_p, task_p = get_full_prompt(m, game, "night_mafia", world_summary)
+                sys_p, task_p = get_full_prompt(m, moderator, game, "night_mafia", world_summary)
                 user_p = f"CURRENT ROSTER:\n{roster}\n{task_p}"
 
                 res = call_llm(m, sys_p, user_p)
-                m.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
+                m.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num, broadcast=False)
                 mafia_responses.append(res['public'])
 
             # NEW: Name-based Borda resolution
@@ -116,12 +156,12 @@ def run_game():
             save_id = None
             if doc:
                 # Use the name-based last_saved for the prompt
-                sys_p, task_p = get_full_prompt(doc, game, "night_doctor", world_summary, {"last_saved": game.last_saved_name})
+                sys_p, task_p = get_full_prompt(doc, moderator, game, "night_doctor", world_summary, {"last_saved": game.last_saved_name})
                 user_p = f"CURRENT ROSTER:\n{roster}\n{task_p}"
 
                 res = call_llm(doc, sys_p, user_p)
                 # doc.save_turn(LIVE_DIR, res['thought'], "[PRIVATE NIGHT ACTION]", game.round_num)
-                doc.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
+                doc.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num, broadcast=False)
                 # Helper to find the ID from the name mentioned
                 save_name = res['public']
                 living_agents = game.get_living_agents()
@@ -155,7 +195,7 @@ def run_game():
             wave1_transcript = ""
             living_agents = game.get_living_agents()
             for a in living_agents:
-                sys_p, task_p = get_full_prompt(a, game, "day_wave_1", world_summary)
+                sys_p, task_p = get_full_prompt(a, moderator, game, "day_wave_1", world_summary)
                 user_p = f"MODERATOR REPORT:\n{report}\nCURRENT ROSTER:\n{roster}\n{task_p}"
 
                 res = call_llm(a, sys_p, user_p)
@@ -165,7 +205,7 @@ def run_game():
             # WAVE 2: Rebuttals
             for a in living_agents:
                 # We pass the wave1_transcript into the format dict
-                sys_p, task_p = get_full_prompt(a, game, "day_wave_2", world_summary, {"wave_1_statements": wave1_transcript})
+                sys_p, task_p = get_full_prompt(a, moderator, game, "day_wave_2", world_summary, {"wave_1_statements": wave1_transcript})
                 user_p = task_p  # The formatted task contains the statements
 
                 res = call_llm(a, sys_p, user_p)
@@ -179,7 +219,7 @@ def run_game():
             living_names = [a.name for a in living_agents]
 
             for a in living_agents:
-                sys_p, _ = get_full_prompt(a, game, "vote", world_summary)
+                sys_p, _ = get_full_prompt(a, moderator, game, "vote", world_summary)
                 user_p = f"FINAL VOTE: Who do you want to eliminate? State the NAME of the player. (Living: {', '.join(living_names)})"
 
                 res = call_llm(a, sys_p, user_p)

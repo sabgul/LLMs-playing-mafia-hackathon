@@ -7,8 +7,9 @@ TEAMS:
 2. Village Team, including the Doctor.
 
 WIN CONDITIONS:
-- Mafia Win: If Mafia members equal or outnumber the living Villagers.
-- Village Win: If both Mafia members are eliminated.
+- Mafia Win: If only Mafia members are alive.
+- Village Win: If both Mafia members are eliminated, and only villagers remain.
+- Tie: If one villager and one mafioso remain.
 
 PHASES:
 The game alternates between Night and Day. Once a player is killed or eliminated, they are out of the game.
@@ -36,7 +37,7 @@ Game is never wrong. The rules are always as stated. So if you sense something i
 ### DAY PHASE STRUCTURE ###
 1. First Discussion: Everyone makes a concurrent statement.
 2. Second Discussion: Everyone responds to the first statements.
-3. Secret Vote: Everyone votes for one player to be eliminated. Highest vote total is executed.
+3. Secret Vote: Everyone votes for one player to be eliminated. Player with the highest number of votes is executed.
 """
 
 # Unique identity strings to be appended to the BASE_RULES
@@ -50,7 +51,7 @@ IDENTITY_STRINGS = {
 
 # Task-specific instructions for each step of the game
 PHASE_TASKS = {
-    "night_mafia": "Rank the living non-mafia players from most desired to kill (1st) to least desired. List their NAMES. Example: [Alice, Frank, David]",
+    "night_mafia": "Provide your ranking for the kill, from most desired to kill (1st) to least desired. Format: [NAME1, NAME2, NAME3...]. Put the names in the brackets. Example: [Alice, Frank, David] Don't provide any explanation or reasoning in the public output, just the list.",
     "night_doctor": "Choose one player NAME to save. You cannot choose {last_saved}..",
     "day_wave_1": """WAVE 1: The floor is open. Introduce your suspicions, make a claim, or ask a question. Be 
     concise. You may claim a role (true or false) or ask a specific player a question. Do not vote yet. Focus on 
@@ -58,7 +59,7 @@ PHASE_TASKS = {
     "day_wave_2": """WAVE 2: REBUTTALS & FINAL INTENT. Below are the statements made by everyone in Wave 1.Respond 
     directly to accusations or questions directed at you. Point out contradictions in others' stories. State clearly 
     who you intend to vote for and why. Statements: {wave_1_statements}""",
-    "vote": "VOTE: Provide ONLY the ID of the player you wish to eliminate."
+    "vote": "VOTE: Provide ONLY the name of the player you wish to eliminate."
 }
 
 MODERATOR_SUMMARY_PROMPT ="""
@@ -81,4 +82,17 @@ Summarize the most important statements from the current round:
 List the names of all players still alive and their general "standing" in the group discussion (e.g., "Under heavy suspicion", "Quiet", "Trusted by X").
 
 Keep it strictly objective. Do not invent information. Focus on providing a 'map' of the social landscape.
+"""
+
+PERSONAL_SUMMARY_PROMPT = """
+You are summarizing the private scratchpad of a Mafia game player. 
+Your goal is to provide a concise 'Internal State' for them.
+
+Include:
+1. What is their current cover story (what are they pretending to be)?
+2. Who do they secretly trust or suspect?
+3. What lies have they told that they need to remain consistent with?
+4. What is their immediate next goal?
+
+Keep it very short (under 100 words) and use the first-person 'You'.
 """

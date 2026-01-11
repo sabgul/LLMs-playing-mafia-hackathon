@@ -33,48 +33,94 @@ class MafiaGameState:
         victim.is_alive = False
         return f"Morning breaks. {victim.name} was found dead. They were the {victim.role}.", victim
 
+    # def resolve_borda_kill_by_name(self, mafia_responses):
+    #     """
+    #     mafia_responses: List of strings/lists from Mafia agents.
+    #     Logic: 1st place = 1pt, 2nd = 2pt. LOWEST total score wins (is killed).
+    #     """
+    #     print("\n--- DEBUG: BORDA RESOLUTION START ---")
+    #     living_villagers = [a for a in self.get_living_agents() if a.role != "Mafia"]
+    #     if not living_villagers:
+    #         return None
+    #
+    #     village_names = [a.name.lower() for a in living_villagers]
+    #     scores = {a.id: 0 for a in living_villagers}
+    #
+    #     # We expect a ranking from each living mafioso
+    #     for idx, response in mafia_responses:
+    #         print(f"Mafioso {idx + 1} Raw Response: {response.strip()}")
+    #         # If the response is a string, we need to find the names within it in order
+    #         found_names = []
+    #         # This is a simple way to preserve order from the LLM's text
+    #         words = str(response).replace('[', ' ').replace(']', ' ').replace(',', ' ').split()
+    #         for word in words:
+    #             clean_word = word.strip().lower()
+    #             if clean_word in village_names:
+    #                 # Find the ID associated with this name
+    #                 target_agent = next(a for a in living_villagers if a.name.lower() == clean_word)
+    #                 if target_agent.id not in found_names:
+    #                     found_names.append(target_agent.id)
+    #
+    #         print(f"Parsed IDs in order: {found_names}")
+    #
+    #         # Assign points: 1st gets 1, 2nd gets 2, etc.
+    #         for rank, target_id in enumerate(found_names):
+    #             if target_id in scores:
+    #                 scores[target_id] += (rank + 1)
+    #
+    #         # Penalty for players not ranked by a Mafioso (give them a high score so they aren't killed)
+    #         for vid in scores:
+    #             if vid not in found_names:
+    #                 scores[vid] += 10
+    #
+    #                 # Find the minimum score
+    #     min_score = min(scores.values())
+    #     candidates = [agent_id for agent_id, score in scores.items() if score == min_score]
+    #
+    #     # Tie-breaker: Randomly select one
+    #     return random.choice(candidates)
+
     def resolve_borda_kill_by_name(self, mafia_responses):
-        """
-        mafia_responses: List of strings/lists from Mafia agents.
-        Logic: 1st place = 1pt, 2nd = 2pt. LOWEST total score wins (is killed).
-        """
         living_villagers = [a for a in self.get_living_agents() if a.role != "Mafia"]
         if not living_villagers:
             return None
 
         village_names = [a.name.lower() for a in living_villagers]
+        # Initialize all potential victims with 0 points
         scores = {a.id: 0 for a in living_villagers}
 
-        # We expect a ranking from each living mafioso
-        for response in mafia_responses:
-            # If the response is a string, we need to find the names within it in order
-            found_names = []
-            # This is a simple way to preserve order from the LLM's text
+        # Use enumerate(mafia_responses) to safely get both index and the text
+        for idx, response in enumerate(mafia_responses):
+            found_names_ids = []
+            # Split into words and clean punctuation
             words = str(response).replace('[', ' ').replace(']', ' ').replace(',', ' ').split()
+
             for word in words:
-                clean_word = word.strip().lower()
+                clean_word = word.strip().strip('.').strip('!').lower()
                 if clean_word in village_names:
-                    # Find the ID associated with this name
                     target_agent = next(a for a in living_villagers if a.name.lower() == clean_word)
-                    if target_agent.id not in found_names:
-                        found_names.append(target_agent.id)
+                    if target_agent.id not in found_names_ids:
+                        found_names_ids.append(target_agent.id)
 
-            # Assign points: 1st gets 1, 2nd gets 2, etc.
-            for rank, target_id in enumerate(found_names):
-                if target_id in scores:
-                    scores[target_id] += (rank + 1)
+            # Assign Borda points
+            for rank, target_id in enumerate(found_names_ids):
+                points = rank + 1
+                scores[target_id] += points
 
-            # Penalty for players not ranked by a Mafioso (give them a high score so they aren't killed)
+            # Apply the +10 penalty for anyone NOT mentioned by THIS Mafioso
             for vid in scores:
-                if vid not in found_names:
+                if vid not in found_names_ids:
                     scores[vid] += 10
 
-                    # Find the minimum score
+        # NOW we calculate the winner AFTER all mafiosi have been processed
+        if not scores:
+            return None
+
         min_score = min(scores.values())
         candidates = [agent_id for agent_id, score in scores.items() if score == min_score]
 
-        # Tie-breaker: Randomly select one
-        return random.choice(candidates)
+        final_victim_id = random.choice(candidates)
+        return final_victim_id
 
     def resolve_vote_by_name(self, vote_texts):
         living_agents = self.get_living_agents()
@@ -105,10 +151,30 @@ class MafiaGameState:
         mafia = [a for a in living if a.role == "Mafia"]
         villagers = [a for a in living if a.role != "Mafia"]
 
+        # if not mafia:
+        #     self.game_over = True
+        #     self.winner = "Villagers"
+        # elif len(mafia) > len(villagers):
+        #     self.game_over = True
+        #     self.winner = "Mafia"
+
         if not mafia:
             self.game_over = True
             self.winner = "Villagers"
-        elif len(mafia) >= len(villagers):
+        elif not villagers:
             self.game_over = True
             self.winner = "Mafia"
+        elif len(mafia) == 1 and len(villagers) == 1:
+            self.game_over = True
+            self.winner = "Tie. One mafioso and one villager left."
+
         return self.game_over
+
+# WIN CONDITIONS:
+# - Mafia Win: If Mafia members equal or outnumber the living Villagers.
+# - Village Win: If both Mafia members are eliminated.
+
+# WIN CONDITIONS:
+# - Mafia Win: If only Mafia members are alive.
+# - Village Win: If both Mafia members are eliminated, and only villagers remain.
+# - Tie: If one villager and one mafioso remain.
