@@ -60,7 +60,7 @@ class Judge:
         return analysis_report
 
 
-def analysis(target_folder_name):
+def run_analysis(target_folder_name):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
     target_path = os.path.join(project_root, "outputs", target_folder_name)
@@ -74,4 +74,4 @@ def analysis(target_folder_name):
 
 
 if __name__ == "__main__":
-    analysis('game_20260111_014850')
+    run_analysis('game_20260111_013542')
