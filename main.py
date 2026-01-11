@@ -1,5 +1,6 @@
 import os
 import shutil
+import random
 from datetime import datetime
 
 from engine.game_state import MafiaGameState
@@ -75,8 +76,13 @@ def run_game(mafia_level, doc_level):
             for m in mafiosos:
                 sys_p, task_p = get_full_prompt(m, moderator, game, "night_mafia", world_summary)
                 user_p = f"CURRENT ROSTER:\n{roster}\n{task_p}"
-
                 res = call_llm(m, sys_p, user_p)
+
+                if "API ERROR" in res['public']:
+                    print(f"🛑 API ERROR for {m.name} (Mafia) at Night. Using fallback.")
+                    res['thought'] = "I am having trouble connecting to my strategic thoughts."
+                    res['public'] = "[]"
+
                 m.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num, broadcast=False)
                 mafia_responses.append(res['public'])
 
@@ -90,6 +96,12 @@ def run_game(mafia_level, doc_level):
                 user_p = f"CURRENT ROSTER:\n{roster}\n{task_p}"
 
                 res = call_llm(doc, sys_p, user_p)
+
+                if "API ERROR" in res['public']:
+                    print(f"🛑 API ERROR for {doc.name} (Doctor) at Night. Using fallback.")
+                    res['thought'] = "I cannot determine who to save due to a mental block."
+                    res['public'] = f"{doc.name}"
+
                 doc.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num, broadcast=False)
                 save_name = res['public']
                 living_agents = game.get_living_agents()
@@ -124,6 +136,10 @@ def run_game(mafia_level, doc_level):
                 user_p = f"MODERATOR REPORT:\n{report}\nCURRENT ROSTER:\n{roster}\n{task_p}"
 
                 res = call_llm(a, sys_p, user_p)
+                if "API ERROR" in res['public']:
+                    print(f"🛑 API ERROR for {a.name} during Day Wave 1.")
+                    res['thought'] = "Connection lost. Cannot formulate argument."
+                    res['public'] = "I am currently observing the situation and have no comment yet."
                 a.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
                 wave1_transcript += f"{a.name}: {res['public']}\n"
 
@@ -134,6 +150,10 @@ def run_game(mafia_level, doc_level):
                 user_p = task_p
 
                 res = call_llm(a, sys_p, user_p)
+                if "API ERROR" in res['public']:
+                    print(f"🛑 API ERROR for {a.name} during Day Wave 2.")
+                    res['thought'] = "Connection lost. Cannot rebuttal."
+                    res['public'] = "I have nothing further to add to my previous statement."
                 a.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
 
             # ==========================
@@ -148,6 +168,12 @@ def run_game(mafia_level, doc_level):
                 user_p = f"FINAL VOTE: Who do you want to eliminate? State the NAME of the player. (Living: {', '.join(living_names)})"
 
                 res = call_llm(a, sys_p, user_p)
+                if "API ERROR" in res['public']:
+                    print(f"🛑 API ERROR for {a.name} during Voting.")
+                    res['thought'] = "Connection lost. Voting randomly to maintain game flow."
+                    # Random vote fallback to ensure the engine doesn't break
+                    res['public'] = random.choice([name for name in living_names if name != a.name])
+
                 votes.append(res['public'])
                 log_to_dev(LIVE_DIR, f"VOTE CAST: {a.name} voted. (Thought: {res['thought']})")
 
