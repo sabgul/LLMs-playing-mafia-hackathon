@@ -5,7 +5,8 @@ from engine.players import get_initial_players, get_moderator
 from engine.game_state import MafiaGameState
 from engine.llm_client import call_llm
 from engine.logger import setup_live_folder, log_to_blackboard, log_to_dev
-from engine.prompts import BASE_RULES, IDENTITY_STRINGS, PHASE_TASKS, MODERATOR_SUMMARY_PROMPT, PERSONAL_SUMMARY_PROMPT
+from engine.prompts import BASE_RULES, IDENTITY_STRINGS, PHASE_TASKS, MODERATOR_SUMMARY_PROMPT, PERSONAL_SUMMARY_PROMPT, \
+    BEHAVIOR_LEVELS
 
 LIVE_DIR = "live_session_output"
 FINAL_DIR = "outputs"
@@ -17,26 +18,25 @@ def get_roster(game):
 
 
 def get_full_prompt(agent, moderator, game, task_key, world_summary, extra_data=None):
-    # 1. Partner Logic for Mafia
     partner_name = "None"
     if agent.role == "Mafia":
         partner = next((a for a in game.agents if a.role == "Mafia" and a.id != agent.id), None)
         partner_name = partner.name if partner else "None"
 
-    # 2. Identity String
     identity = IDENTITY_STRINGS[agent.role].format(
         name=agent.name,
         id=agent.id,
         partner=partner_name
     )
-
-    # 3. Memory Block (The Amnesia Fix)
+    behavior_instruction = BEHAVIOR_LEVELS.get(agent.behavior_level, "")
     personal_summary = get_scratchpad_summary(moderator, agent, LIVE_DIR)
 
-    # 4. Final System Construction
     full_system = f"""
     {BASE_RULES}
     {identity}
+    
+    ### YOUR STRATEGIC BEHAVIORAL GUIDELINES ###
+    {behavior_instruction}
 
     ### PUBLIC WORLD STATE (Moderator Summary) ###
     {world_summary}
@@ -45,7 +45,6 @@ def get_full_prompt(agent, moderator, game, task_key, world_summary, extra_data=
     {personal_summary}
     """
 
-    # 5. Task Logic
     task = PHASE_TASKS[task_key]
     if extra_data:
         # This handles injecting things like {wave_1_statements}
@@ -112,16 +111,33 @@ def get_scratchpad_summary(moderator, agent, live_dir):
         return f"Recent notes from your scratchpad:\n...{scratchpad_content[-1000:]}"
 
 
-def run_game():
+def run_game(mafia_level, doc_level):
     agents = get_initial_players()
     moderator = get_moderator()
+
+    for a in agents:
+        if a.role == "Mafia":
+            a.behavior_level = mafia_level
+        elif a.role == "Doctor":
+            a.behavior_level = doc_level
+        else:
+            a.behavior_level = 2
+
     game = MafiaGameState(agents)
     setup_live_folder(LIVE_DIR)
 
-    manifest = "\n".join([
+    roster_details = "\n".join([
         f"Agent {a.id} ({a.name}): Model={a.model}, Provider={a.provider}, Role={a.role}"
         for a in agents
     ])
+
+    manifest = f"""
+    {roster_details}
+
+    ### EXPERIMENT SETUP ###
+    Behavior level setup: Mafia Level {mafia_level}, Doctor Level {doc_level}
+    """
+
     log_to_dev(LIVE_DIR, f"SYSTEM: Game Manifest Initialized.\n{manifest}\n\nGAME START: Roles assigned.")
 
     try:
@@ -256,5 +272,19 @@ def run_game():
         print(f"Game finished. Results in {final_path}")
 
 
+def run_experiment_suite():
+    levels = [1, 2, 3, 4]
+
+    for m_level in levels:  # Mafia Behavior
+        for d_level in levels:  # Doctor Behavior
+            print(f"🚀 Starting Experiment: Mafia Lvl {m_level} vs Doc Lvl {d_level}")
+
+            run_game(mafia_level=m_level, doc_level=d_level)
+
+
 if __name__ == "__main__":
-    run_game()
+    run_experiment_suite()
+
+
+# if __name__ == "__main__":
+#     run_game()

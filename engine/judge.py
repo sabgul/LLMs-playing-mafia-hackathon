@@ -74,4 +74,4 @@ def analysis(target_folder_name):
 
 
 if __name__ == "__main__":
-    analysis('game_20260111_014850')
+    analysis('game_20260111_013542')

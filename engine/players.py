@@ -12,6 +12,7 @@ class Agent:
     model: str
     provider: str
     is_alive: bool = True
+    behavior_level: int = 2
     history: List[Dict] = field(default_factory=list)
 
     def add_to_memory(self, thought, public_statement, round_num):
