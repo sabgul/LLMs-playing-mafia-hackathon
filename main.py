@@ -2,115 +2,29 @@ import os
 import shutil
 from datetime import datetime
 
-from engine.judge import run_analysis
-from engine.players import get_initial_players, get_moderator
 from engine.game_state import MafiaGameState
 from engine.llm_client import call_llm
-from engine.logger import setup_live_folder, log_to_blackboard, log_to_dev
-from engine.prompts import BASE_RULES, IDENTITY_STRINGS, PHASE_TASKS, MODERATOR_SUMMARY_PROMPT, PERSONAL_SUMMARY_PROMPT, \
+from engine.logger import setup_live_folder, log_to_dev, log_to_blackboard
+from engine.players import get_initial_players, get_moderator
+from engine.prompts import PERSONAL_SUMMARY_PROMPT, MODERATOR_SUMMARY_PROMPT, PHASE_TASKS, IDENTITY_STRINGS, BASE_RULES, \
     BEHAVIOR_LEVELS
+from engine.judge import run_analysis
 
 LIVE_DIR = "live_session_output"
 FINAL_DIR = "outputs"
 
 
-def get_roster(game):
-    living = game.get_living_agents()
-    return "\n".join([f"- Agent {a.id}: {a.name}" for a in living])
+def run_experiment_suite():
+    levels = [1, 2, 3, 4]
+    trials = 5
 
+    for t in range(1, trials + 1):
+        for m_level in levels:
+            for d_level in levels:
+                print(f"[Trial {t}/5] Mafia Lvl {m_level}, Doc Lvl {d_level}")
 
-def get_full_prompt(agent, moderator, game, task_key, world_summary, extra_data=None):
-    partner_name = "None"
-    if agent.role == "Mafia":
-        partner = next((a for a in game.agents if a.role == "Mafia" and a.id != agent.id), None)
-        partner_name = partner.name if partner else "None"
-
-    identity = IDENTITY_STRINGS[agent.role].format(
-        name=agent.name,
-        id=agent.id,
-        partner=partner_name
-    )
-    behavior_instruction = BEHAVIOR_LEVELS.get(agent.behavior_level, "")
-    personal_summary = get_scratchpad_summary(moderator, agent, LIVE_DIR)
-
-    full_system = f"""
-    {BASE_RULES}
-    {identity}
-    
-    ### YOUR STRATEGIC BEHAVIORAL GUIDELINES ###
-    {behavior_instruction}
-
-    ### PUBLIC WORLD STATE (Moderator Summary) ###
-    {world_summary}
-
-    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
-    {personal_summary}
-    """
-
-    task = PHASE_TASKS[task_key]
-    if extra_data:
-        # This handles injecting things like {wave_1_statements}
-        task = task.format(**extra_data)
-
-    prompts_path = os.path.join(LIVE_DIR, "prompts.txt")
-    with open(prompts_path, "a") as f:
-        f.write(f"====================================================\n")
-        f.write(f"AGENT: {agent.name} | ROUND: {game.round_num} | TASK: {task_key}\n")
-        f.write(f"====================================================\n")
-        f.write(f"SYSTEM PROMPT:\n{full_system}\n")
-        f.write(f"USER TASK:\n{task}\n\n")
-
-    return full_system, task
-
-
-def get_game_summary(moderator, file_path):
-    if not os.path.exists(file_path):
-        return "The game has just begun."
-
-    try:
-        with open(file_path, 'r') as f:
-            full_transcript = f.read()
-
-        # Attempt the Groq call
-        res = call_llm(moderator, MODERATOR_SUMMARY_PROMPT, full_transcript)
-
-        # Check if the response itself indicates a failure
-        content = res.get('public', "").lower()
-
-        if "api error" in content or not content:
-            raise ValueError(f"Groq returned an invalid response: {content}")
-
-        return res['public']
-
-    except Exception as e:
-        # Log the error to your dev log so you can track how often Groq fails
-        error_msg = f"MODERATOR ERROR: {str(e)}. Falling back to raw transcript."
-        log_to_dev(LIVE_DIR, error_msg)
-        return f"Full summary unavailable due to technical glitch."
-
-
-def get_scratchpad_summary(moderator, agent, live_dir):
-    # Construct the path to the agent's specific scratchpad
-    file_path = os.path.join(live_dir, f"agent_{agent.id}_{agent.name}.txt")
-
-    if not os.path.exists(file_path):
-        return "You have no private history yet. This is the beginning of your mission."
-
-    try:
-        with open(file_path, 'r') as f:
-            scratchpad_content = f.read()
-
-        res = call_llm(moderator, PERSONAL_SUMMARY_PROMPT, scratchpad_content)
-
-        content = res.get('public', "").lower()
-        if "api error" in content or not content:
-            raise ValueError("Moderator failed to summarize scratchpad.")
-
-        return res['public']
-
-    except Exception as e:
-        log_to_dev(live_dir, f"MEMORY ERROR for {agent.name}: {str(e)}")
-        return f"Recent notes from your scratchpad:\n...{scratchpad_content[-1000:]}"
+                result_name = run_game(mafia_level=m_level, doc_level=d_level)
+                run_analysis(result_name)
 
 
 def run_game(mafia_level, doc_level):
@@ -166,28 +80,22 @@ def run_game(mafia_level, doc_level):
                 m.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num, broadcast=False)
                 mafia_responses.append(res['public'])
 
-            # NEW: Name-based Borda resolution
             kill_id = game.resolve_borda_kill_by_name(mafia_responses)
 
             # Doctor Save
             doc = game.get_doctor_agent()
             save_id = None
             if doc:
-                # Use the name-based last_saved for the prompt
                 sys_p, task_p = get_full_prompt(doc, moderator, game, "night_doctor", world_summary, {"last_saved": game.last_saved_name})
                 user_p = f"CURRENT ROSTER:\n{roster}\n{task_p}"
 
                 res = call_llm(doc, sys_p, user_p)
-                # doc.save_turn(LIVE_DIR, res['thought'], "[PRIVATE NIGHT ACTION]", game.round_num)
                 doc.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num, broadcast=False)
-                # Helper to find the ID from the name mentioned
                 save_name = res['public']
                 living_agents = game.get_living_agents()
-                # Find which living player's name is in the response
                 matched_agent = next((a for a in living_agents if a.name.lower() in save_name.lower()), None)
                 save_id = matched_agent.id if matched_agent else doc.id  # Default to self-save if hallucinated
 
-            # Resolution
             report, victim = game.resolve_night(kill_id, save_id)
             log_to_blackboard(LIVE_DIR, "Moderator", report)
 
@@ -197,7 +105,6 @@ def run_game(mafia_level, doc_level):
             else:
                 log_to_dev(LIVE_DIR, f"RESULT: Night {game.round_num} - No one died.")
 
-            # if game.check_win(): break
             if game.check_win():
                 living_final = [a.name for a in game.get_living_agents()]
                 summary = f"******************************\nFINAL GAME RESULT: {game.winner.upper()} WIN\nTotal Rounds: {game.round_num}\nSurvivors: {living_final}\n******************************"
@@ -222,9 +129,9 @@ def run_game(mafia_level, doc_level):
 
             # WAVE 2: Rebuttals
             for a in living_agents:
-                # We pass the wave1_transcript into the format dict
+                # pass the wave1_transcript into the format dict
                 sys_p, task_p = get_full_prompt(a, moderator, game, "day_wave_2", world_summary, {"wave_1_statements": wave1_transcript})
-                user_p = task_p  # The formatted task contains the statements
+                user_p = task_p
 
                 res = call_llm(a, sys_p, user_p)
                 a.save_turn(LIVE_DIR, res['thought'], res['public'], game.round_num)
@@ -275,17 +182,98 @@ def run_game(mafia_level, doc_level):
         return f"game_{timestamp}"
 
 
-def run_experiment_suite():
-    levels = [1, 2, 3, 4]
-    trials = 5
+def get_roster(game):
+    living = game.get_living_agents()
+    return "\n".join([f"- Agent {a.id}: {a.name}" for a in living])
 
-    for m_level in levels:
-        for d_level in levels:
-            for t in range(1, trials + 1):
-                print(f"🚀 [Trial {t}/5] Mafia Lvl {m_level}, Doc Lvl {d_level}")
 
-                result_name = run_game(mafia_level=m_level, doc_level=d_level)
-                run_analysis(result_name)
+def get_full_prompt(agent, moderator, game, task_key, world_summary, extra_data=None):
+    partner_name = "None"
+    if agent.role == "Mafia":
+        partner = next((a for a in game.agents if a.role == "Mafia" and a.id != agent.id), None)
+        partner_name = partner.name if partner else "None"
+
+    identity = IDENTITY_STRINGS[agent.role].format(
+        name=agent.name,
+        id=agent.id,
+        partner=partner_name
+    )
+    behavior_instruction = BEHAVIOR_LEVELS.get(agent.behavior_level, "")
+    personal_summary = get_scratchpad_summary(moderator, agent, LIVE_DIR)
+
+    full_system = f"""
+    {BASE_RULES}
+    {identity}
+
+    ### YOUR STRATEGIC BEHAVIORAL GUIDELINES ###
+    {behavior_instruction}
+
+    ### PUBLIC WORLD STATE (Moderator Summary) ###
+    {world_summary}
+
+    ### YOUR PRIVATE STRATEGY (Summarized from your scratchpad) ###
+    {personal_summary}
+    """
+
+    task = PHASE_TASKS[task_key]
+    if extra_data:
+        # handles injecting things like {wave_1_statements}
+        task = task.format(**extra_data)
+
+    prompts_path = os.path.join(LIVE_DIR, "prompts.txt")
+    with open(prompts_path, "a") as f:
+        f.write(f"====================================================\n")
+        f.write(f"AGENT: {agent.name} | ROUND: {game.round_num} | TASK: {task_key}\n")
+        f.write(f"====================================================\n")
+        f.write(f"SYSTEM PROMPT:\n{full_system}\n")
+        f.write(f"USER TASK:\n{task}\n\n")
+
+    return full_system, task
+
+
+def get_game_summary(moderator, file_path):
+    if not os.path.exists(file_path):
+        return "The game has just begun."
+
+    try:
+        with open(file_path, 'r') as f:
+            full_transcript = f.read()
+
+        res = call_llm(moderator, MODERATOR_SUMMARY_PROMPT, full_transcript)
+        content = res.get('public', "").lower()
+
+        if "api error" in content or not content:
+            raise ValueError(f"ERROR: {moderator.model} returned an invalid response: {content}")
+
+        return res['public']
+
+    except Exception as e:
+        error_msg = f"MODERATOR ERROR: {str(e)}. Falling back to raw transcript."
+        log_to_dev(LIVE_DIR, error_msg)
+        return f"Full summary unavailable due to technical glitch."
+
+
+def get_scratchpad_summary(moderator, agent, live_dir):
+    file_path = os.path.join(live_dir, f"agent_{agent.id}_{agent.name}.txt")
+
+    if not os.path.exists(file_path):
+        return "You have no private history yet. This is the beginning of your mission."
+
+    try:
+        with open(file_path, 'r') as f:
+            scratchpad_content = f.read()
+
+        res = call_llm(moderator, PERSONAL_SUMMARY_PROMPT, scratchpad_content)
+
+        content = res.get('public', "").lower()
+        if "api error" in content or not content:
+            raise ValueError("Moderator failed to summarize scratchpad.")
+
+        return res['public']
+
+    except Exception as e:
+        log_to_dev(live_dir, f"MEMORY ERROR for {agent.name}: {str(e)}")
+        return f"Recent notes from your scratchpad:\n...{scratchpad_content[-1000:]}"
 
 
 if __name__ == "__main__":
