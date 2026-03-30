@@ -25,7 +25,7 @@ def run_experiment_suite():
                 print(f"[Trial {t}/5] Mafia Lvl {m_level}, Doc Lvl {d_level}")
 
                 result_name = run_game(mafia_level=m_level, doc_level=d_level)
-                run_analysis(result_name)
+                # run_analysis(result_name) # TODO: judge all experiments in a batch afterwards
 
 
 def run_game(mafia_level, doc_level):
