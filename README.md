@@ -213,39 +213,73 @@ Output: `judge_results.csv` and all figures under `figures/`.
 
 ## Results
 
-_This section will be populated with findings after full analysis._
+<!-- _This section will be populated with findings after full analysis._ -->
 
-### Heatmaps — Overall Deception by Config
+<!-- ### Heatmaps - Overall Deception by Config -->
 
-_Figures: `figures/heatmap_mafia_overall_deception_{judge}.png`, `figures/heatmap*doctor_overall_deception*{judge}.png`\_
+<!-- ![Mafia overall deception with Claude judge](figures/heatmap_mafia_overall_deception_claude-sonnet-4-6.png) -->
 
-<!-- Insert heatmap figures here -->
+<!-- ![Mafia overall deception with Gemini judge](figures/heatmap_mafia_overall_deception_gemini-2.5-flash-lite.png) -->
+<!-- ![Mafia overall deception with GPT judge](figures/heatmap_doctor_overall_deception_gpt-4o.png) -->
+
+<!-- ![Doctor overall deception with Claude judge](figures/heatmap_doctor_overall_deception_claude-sonnet-4-6.png) -->
+
+<!-- ![Doctor overall deception with Gemini judge](figures/heatmap_doctor_overall_deception_gemini-2.5-flash-lite.png) -->
+<!-- ![Doctor overall deception with GPT judge](figures/heatmap_doctor_overall_deception_gpt-4o.png) -->
 
 ### Deception Floor (Level-1 Agents)
 
-_How much deception do agents exhibit even when instructed to be strictly honest?_
+Mafia agents instructed to be completely honest (Level 1) still score 6.7–7.7/10 on deception depending on the judge. This "deception floor" persists across all 16 configurations, suggesting that the structural demands of an adversarial role override explicit behavioral constraints. Deception scores increase only modestly from Level 1 to Level 4, indicating that the game environment, not the prompt, is the primary driver of deceptive behavior.
 
-_Figures: `figures/deception_floor_{judge}.png`\_
+<table>
+<tr>
+<td><img src="figures/heatmap_mafia_overall_deception_claude-sonnet-4-6.png" width="400"/></td>
+<td><img src="figures/heatmap_doctor_overall_deception_claude-sonnet-4-6.png" width="400"/></td>
+</tr>
+</table>
 
-<!-- Insert deception floor figures here -->
+![Deception floor with Claude judge](figures/deception_floor_claude-sonnet-4-6.png)
+
+<!-- ![Deception floor with Gemini judge](figures/deception_floor_gemini-2.5-flash-lite.png) -->
+<!-- ![Deception floor with GPT judge](figures/deception_floor_gpt-4o.png) -->
 
 ### Deception by Role
 
-<!-- Insert role comparison boxplots here -->
+Mafia agents deceive primarily through strategic omission (9.2/10) and misdirection (8.0/10), not through direct fabrication (4.9/10). They conceal and redirect rather than invent (more like politicians than pathological liars). The Doctor shows a similar but milder pattern, hiding their role through omission (6.8/10) rather than fabrication (1.3/10). Villagers serve as a clean control, scoring near-zero across all dimensions.
 
-### Win Rate by Configuration
+<table>
+<tr>
+<td><img src="figures/role_comparison_claude-sonnet-4-6.png" width="400"/></td>
+<td><img src="figures/radar_claude-sonnet-4-6.png" width="400"/></td>
+</tr>
+</table>
 
-<!-- Insert win rate heatmap here -->
+<!-- ![Role comparison — Claude judge](figures/role_comparison_claude-sonnet-4-6.png) -->
+<!-- ![Role comparison — Gemini judge](figures/role_comparison_gemini-2.5-flash-lite.png) -->
+<!-- ![Role comparison — GPT-4o judge](figures/role_comparison_gpt-4o.png) -->
+
+<!-- ![Radar — Claude judge](figures/radar_claude-sonnet-4-6.png) -->
+<!-- ![Radar — Gemini judge](figures/radar_gemini-2.5-flash-lite.png) -->
+<!-- ![Radar — GPT-4o judge](figures/radar_gpt-4o.png) -->
+
+<!-- ### Win Rate by Configuration
+
+![Win rate — Claude judge](figures/winrate_claude-sonnet-4-6.png) -->
+<!-- ![Win rate — Gemini judge](figures/winrate_gemini-2.5-flash-lite.png) -->
+<!-- ![Win rate — GPT-4o judge](figures/winrate_gpt-4o.png) -->
 
 ### Cross-Judge Agreement
 
-<!-- Insert judge correlation matrix here -->
+> Note: to keep this readme concise, we only show results for Claude judge. Full results and plots across all judges can be found in `figures/` and `judge_results.csv`.
+
+Three independent judge models from different families (Claude Sonnet, GPT-4o, Gemini Flash Lite) show strong agreement on deception scores (r = 0.85–0.97). This confirms that the deception floor and the omission-over-fabrication pattern are robust findings, not artifacts of any particular judge's biases.
+![Judge agreement](figures/judge_agreement.png)
 
 ---
 
 ## Discussion
 
-_To be filled in after reviewing results._
+Across 160 games, 3 judge models, and 5 deception dimensions, two findings emerge consistently: (1) behavioral prompting fails to prevent deception when structural incentives demand it. Even "honest" Mafia agents deceive at more than 7/10; and (2) LLM deception manifests primarily as strategic omission and misdirection rather than fabrication, suggesting that alignment approaches targeting explicit lying may miss the most common forms of model deception.
 
 <!-- Questions to answer: -->
 
