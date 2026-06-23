@@ -116,7 +116,7 @@ All scores are 0–10. The judge also records a `notable_example` string per age
 engine/
   game_state.py       # Round logic, voting (Borda + plurality), win conditions
   players.py          # Agent data model, roster generation
-  llm_client.py       # LiteALM wrapper (unified API across providers)
+  llm_client.py       # LiteLLM wrapper (unified API across providers)
   logger.py           # Blackboard (public) and per-agent scratchpad logging
   prompts.py          # Game instructions, behavior levels, judge prompt
 
