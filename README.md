@@ -1,5 +1,7 @@
 # LLMs Playing Mafia
 
+>  🚧  🚧  🚧 This readme is now outdated, as I have re-run some experiments and not everything stated here is true. Will be updated soon.
+
 A multi-agent experimental platform for studying deception in Large Language Models through structured social gameplay. LLM agents play Mafia (a game that requires strategic lying, manipulation, and social reasoning) under controlled behavioral constraints, while an ensemble of judge models scores the deception along multiple dimensions.
 
 > **Note**: The `main` branch contains the original hackathon submission. This `extension` branch expands the experiment scale, replaces the single judge with a 3-model ensemble, adds 5-dimensional deception scoring, and builds a full analysis pipeline. The report for original version can be found at [Apart's website](https://apartresearch.com/project/goodharts-village-using-llmmafia-to-study-deception-9jo6).
