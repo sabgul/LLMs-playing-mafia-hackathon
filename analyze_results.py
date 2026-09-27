@@ -214,6 +214,58 @@ def _bootstrap_ci(data, n_boot=5000, ci=95, seed=42):
     return np.mean(data), lo, hi
 
 
+def plot_level1_vs_level4(df, outdir):
+    """Per-judge box+strip plots comparing Mafia Level 1 vs Level 4 overall deception."""
+    judges = [j for j in JUDGE_ORDER if j in df["judge_model"].unique()]
+    n = len(judges)
+    mafia = df[df["agent_role"] == "Mafia"]
+    subset = mafia[mafia["mafia_level"].isin([1, 4])].copy()
+    subset["level_label"] = subset["mafia_level"].map({1: "Level 1", 4: "Level 4"})
+    level_colors = {"Level 1": "#85c1e9", "Level 4": "#d62728"}
+
+    fig, axes = plt.subplots(1, n, figsize=(5 * n, 5), sharey=True)
+    if n == 1:
+        axes = [axes]
+
+    for ax, judge in zip(axes, judges):
+        jdf = subset[subset["judge_model"] == judge]
+
+        sns.boxplot(data=jdf, x="level_label", y="overall_deception",
+                    order=["Level 1", "Level 4"], palette=level_colors,
+                    ax=ax, showfliers=False, showmeans=True,
+                    meanprops={"marker": "D", "markerfacecolor": "white",
+                               "markeredgecolor": "black", "markersize": 6})
+        sns.stripplot(data=jdf, x="level_label", y="overall_deception",
+                      order=["Level 1", "Level 4"],
+                      color="black", alpha=0.15, size=3, jitter=True, ax=ax)
+
+        tick_labels = []
+        for i, lvl_label in enumerate(["Level 1", "Level 4"]):
+            vals = jdf[jdf["level_label"] == lvl_label]["overall_deception"].values
+            mean, lo, hi = _bootstrap_ci(vals)
+            ax.errorbar(i, mean, yerr=[[mean - lo], [hi - mean]],
+                        fmt="none", color="black", capsize=5, linewidth=1.5)
+            tick_labels.append(f"{lvl_label}\nμ={mean:.2f} [{lo:.2f}, {hi:.2f}]")
+
+        ax.set_xticklabels(tick_labels, fontsize=8)
+        ax.set_title(JUDGE_LABELS.get(judge, judge), fontsize=11, fontweight="bold")
+        ax.set_xlabel("")
+        ax.set_ylim(0, 10.5)
+
+    axes[0].set_ylabel("Overall Deception Score", fontsize=11)
+    for ax in axes[1:]:
+        ax.set_ylabel("")
+
+    fig.suptitle("Overall Deception: Mafia Level 1 vs Level 4 — Per Judge\n"
+                 "(error bars = 95% bootstrap CI)",
+                 fontsize=12, fontweight="bold")
+    plt.tight_layout()
+    fname = "level1_vs_level4_per_judge.png"
+    fig.savefig(os.path.join(outdir, fname), dpi=DPI, bbox_inches="tight")
+    plt.close()
+    print(f"  Saved: {fname}")
+
+
 def plot_dimension_breakdown(df, outdir):
     """Grouped bar chart with 95% bootstrap CI error bars, by Mafia behavioral level."""
     dims = ["direct_contradiction", "strategic_omission", "fabrication", "misdirection", "overall_deception"]
@@ -263,8 +315,6 @@ def plot_dimension_breakdown(df, outdir):
                  "(averaged across all judges; error bars = 95% bootstrap CI)",
                  fontsize=12, fontweight="bold")
     ax.legend(title="Mafia Level", fontsize=9, title_fontsize=9)
-    ax.axhline(y=7, color="red", linestyle="--", alpha=0.4, linewidth=1)
-    ax.text(4.62, 7.1, "floor (~7)", color="red", fontsize=8, alpha=0.7)
 
     plt.tight_layout()
     fname = "dimension_breakdown.png"
@@ -331,22 +381,32 @@ def plot_deception_floor_combined(df, outdir):
         jdf = df[df["judge_model"] == judge]
         mafia_l1 = jdf[(jdf["agent_role"] == "Mafia") & (jdf["mafia_level"] == 1)]
 
-        sns.violinplot(data=mafia_l1, x="doc_level", y="overall_deception",
-                       inner="box", palette="YlOrRd", ax=ax, cut=0)
+        sns.boxplot(data=mafia_l1, x="doc_level", y="overall_deception",
+                    color="#d62728", ax=ax, showfliers=False, showmeans=True,
+                    meanprops={"marker": "D", "markerfacecolor": "white",
+                               "markeredgecolor": "black", "markersize": 6})
+        sns.stripplot(data=mafia_l1, x="doc_level", y="overall_deception",
+                      color="black", alpha=0.2, size=3, jitter=True, ax=ax)
+
         mean_val = mafia_l1["overall_deception"].mean()
         ax.axhline(y=mean_val, color="red", linestyle="--", alpha=0.7)
         ax.set_title(JUDGE_LABELS.get(judge, judge), fontsize=11, fontweight="bold")
-        ax.set_xlabel("Doctor Behavioral Level", fontsize=10)
         ax.set_ylim(0, 10.5)
-        ax.text(0.97, mean_val + 0.15, f"Mean: {mean_val:.1f}",
-                transform=ax.get_yaxis_transform(), ha="right", color="red", fontsize=9)
+
+        doc_levels = sorted(mafia_l1["doc_level"].unique())
+        tick_labels = []
+        for dl in doc_levels:
+            m = mafia_l1[mafia_l1["doc_level"] == dl]["overall_deception"].mean()
+            tick_labels.append(f"D-Lvl {dl}\nμ={m:.2f}")
+        ax.set_xticklabels(tick_labels, fontsize=8)
+        ax.set_xlabel("Doctor Behavioral Level", fontsize=10)
 
     axes[0].set_ylabel("Overall Deception Score", fontsize=11)
     for ax in axes[1:]:
         ax.set_ylabel("")
 
-    fig.suptitle("Deception Floor: Mafia at Level 1 (Complete Honesty) — All Judges",
-                 fontsize=13, fontweight="bold")
+    fig.suptitle("Mafia Deception at Level 1 (strictest honesty instruction) Across Doctor Levels — All Judges",
+                 fontsize=12, fontweight="bold")
     plt.tight_layout()
     fname = "deception_floor_combined.png"
     fig.savefig(os.path.join(outdir, fname), dpi=DPI, bbox_inches="tight")
@@ -370,14 +430,12 @@ def plot_role_comparison_combined(df, outdir):
         existing = [r for r in order if r in jdf["agent_role"].values]
 
         sns.boxplot(data=jdf, x="agent_role", y="overall_deception",
-                    order=existing, palette=palette, ax=ax)
+                    order=existing, palette=palette, ax=ax,
+                    showfliers=False, showmeans=True,
+                    meanprops={"marker": "D", "markerfacecolor": "white",
+                               "markeredgecolor": "black", "markersize": 6})
         sns.stripplot(data=jdf, x="agent_role", y="overall_deception",
                       order=existing, color="black", alpha=0.15, size=3, ax=ax)
-
-        for i, role in enumerate(existing):
-            mean_val = jdf[jdf["agent_role"] == role]["overall_deception"].mean()
-            ax.annotate(f"μ={mean_val:.1f}", xy=(i, mean_val), fontsize=9,
-                        ha="center", va="bottom", color="red", fontweight="bold")
 
         ax.set_title(JUDGE_LABELS.get(judge, judge), fontsize=11, fontweight="bold")
         ax.set_xlabel("Agent Role", fontsize=10)
@@ -471,7 +529,7 @@ def plot_judge_agreement(df, outdir):
         ax.set_aspect("equal")
         ax.legend(fontsize=9)
 
-    fig.suptitle("Cross-Judge Agreement — Config-Level Means (n=32 cells)",
+    fig.suptitle("Cross-Judge Agreement — Config-Level Means (n=48 cells)",
                  fontsize=13, fontweight="bold")
     plt.tight_layout()
     fname = "judge_agreement_aggregated.png"
@@ -513,11 +571,15 @@ def plot_judge_agreement_individual(df, outdir):
     if n_pairs == 1:
         axes = [axes]
 
+    rng = np.random.default_rng(42)
+
     for ax, (j1, j2) in zip(axes, pairs):
         for role, color in ROLE_COLORS.items():
             sub = pivot[pivot["agent_role"] == role]
             r = sub[j1].corr(sub[j2])
-            ax.scatter(sub[j1], sub[j2], color=color, alpha=0.4,
+            jx = sub[j1].values + rng.uniform(-0.18, 0.18, size=len(sub))
+            jy = sub[j2].values + rng.uniform(-0.18, 0.18, size=len(sub))
+            ax.scatter(jx, jy, color=color, alpha=0.4,
                        edgecolors="black", linewidth=0.3, s=25,
                        label=f"{role} (r={r:.2f})")
         ax.plot([0, 10], [0, 10], "r--", alpha=0.4)
